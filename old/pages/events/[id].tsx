@@ -1,1 +1,0 @@
-// Event detail page (React + Next.js)

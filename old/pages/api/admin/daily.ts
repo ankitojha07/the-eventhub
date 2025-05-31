@@ -1,1 +1,0 @@
-// GET /api/admin/registrations/daily - Registrations grouped by day

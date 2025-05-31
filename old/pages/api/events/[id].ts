@@ -1,1 +1,0 @@
-// GET /api/events/:id - Fetch single event details
