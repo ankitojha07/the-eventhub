@@ -1,0 +1,30 @@
+{
+  "name": "eventhub",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "mysql2": "^3.0.0",
+    "next": "^13.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "version": "1.0.0",
+  "description": "This is a take home assignment for interview candidates. Read this file carefully and do as expected. Create a simplified web app where users can: 1. View a list of upcoming events (e.g., tech meetups, webinars, workshops) 2. View details about a specific event 3. Register for an event",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankitojha07/eventhub.git"
+  },
+  "author": "Ankit Ojha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ankitojha07/eventhub/issues"
+  },
+  "homepage": "https://github.com/ankitojha07/eventhub#readme"
+}
