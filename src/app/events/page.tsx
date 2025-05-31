@@ -10,7 +10,7 @@ const events = [
 
 const EventsHomePage = () => {
   return (
-    <main className="min-h-screen bg-gray-50 p-6 max-w-7xl mx-auto" onClick={}>
+    <main className="min-h-screen bg-gray-50 p-6 max-w-7xl mx-auto">
       {/* Header */}
       <header className="mb-8">
         <h1 className="text-4xl font-bold text-gray-900 mb-2">
