@@ -10,30 +10,31 @@ type Event = {
   location?: string;
 };
 
-type Props = {
+type PageProps = {
   params: {
     id: string;
   };
 };
 
-async function getEvent(id: string) {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_BASE_URL ||
-    (typeof window === "undefined" ? "http://localhost:3000" : "");
-  const res = await fetch(`${baseUrl}/api/events`);
+async function getEvent(id: string): Promise<Event | undefined> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
+  const res = await fetch(`${baseUrl}/api/events`, {
+    cache: "no-store", // just to be safe
+  });
+
   const events: Event[] = await res.json();
-  return events.find((e: Event) => String(e.id) === id);
+  return events.find((e) => String(e.id) === id);
 }
 
-export default async function EventDetailPage({ params }: Props) {
+export default async function EventDetailPage({ params }: PageProps) {
   const event = await getEvent(params.id);
-
   if (!event) return notFound();
 
   const description =
     event.description ||
-    "Join us for an exciting event filled with learning, networking, and fun! Don’t miss out on the latest trends and insights.";
-  const location = event.location || "Main Conference Hall, City Center";
+    "Join us for an exciting event filled with learning, networking, and fun!";
+  const location = event.location || "Main Conference Hall";
   const domain = event.domain || "General";
 
   return (
