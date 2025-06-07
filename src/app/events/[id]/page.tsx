@@ -10,7 +10,7 @@ type Event = {
   location?: string;
 };
 
-async function getEvent(id: string) {
+async function getEvent(id: string | number) {
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL ||
     (typeof window === "undefined" ? "http://localhost:3000" : "");
