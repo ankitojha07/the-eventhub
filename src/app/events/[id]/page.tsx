@@ -10,12 +10,6 @@ type Event = {
   location?: string;
 };
 
-type PageProps = {
-  params: {
-    id: string;
-  };
-};
-
 async function getEvent(id: string): Promise<Event | undefined> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
@@ -27,8 +21,13 @@ async function getEvent(id: string): Promise<Event | undefined> {
   return events.find((e) => String(e.id) === id);
 }
 
-export default async function EventDetailPage({ params }: PageProps) {
+export default async function EventDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const event = await getEvent(params.id);
+
   if (!event) return notFound();
 
   const description =
