@@ -1,15 +1,22 @@
 import "./globals.css";
-import { ReactNode } from "react";
+import Navbar from "../components/Navbar";
 
 export const metadata = {
   title: "EventHub",
-  description: "Simplified Events App",
+  description: "Discover and register for events",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
