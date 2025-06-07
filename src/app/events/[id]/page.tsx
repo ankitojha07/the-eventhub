@@ -1,11 +1,5 @@
 import { notFound } from "next/navigation";
 
-type PageProps = {
-  params: {
-    id: string;
-  };
-};
-
 type Event = {
   id: string | number;
   title: string;
@@ -25,7 +19,11 @@ async function getEvent(id: string) {
   return events.find((e: Event) => String(e.id) === id);
 }
 
-export default async function EventDetailPage({ params }: PageProps) {
+export default async function EventDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const event = await getEvent(params.id);
 
   if (!event) return notFound();
