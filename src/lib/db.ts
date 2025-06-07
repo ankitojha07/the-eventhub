@@ -10,7 +10,7 @@ db.exec(`
     title TEXT NOT NULL,
     count INTEGER DEFAULT 0,
     date TEXT NOT NULL,
-    domArtificial Intelligencen TEXT NOT NULL
+    domain TEXT NOT NULL
   );
 `);
 
@@ -20,7 +20,7 @@ const row = db.prepare("SELECT COUNT(*) as count FROM events").get() as {
 const count = row.count;
 if (count === 0) {
   const insert = db.prepare(
-    "INSERT INTO events (title, count, date, domArtificial Intelligencen) VALUES (?, ?, ?, ?)"
+    "INSERT INTO events (title, count, date, domain) VALUES (?, ?, ?, ?)"
   );
 
   insert.run(
@@ -160,7 +160,7 @@ if (count === 0) {
   insert.run("Product Growth Meetup", 265, "2025-12-24", "Product");
   insert.run("Zero Trust Security", 325, "2025-12-25", "Security");
   insert.run("Data Science Bootcamp", 375, "2025-12-26", "Data Science");
-  insert.run("Mobile App Launch", 425, "2025-12-27", "Mobile");
+  insert.run("Mobile App Growth", 425, "2025-12-27", "Mobile");
   insert.run(
     "Artificial Intelligence in Logistics",
     235,
@@ -212,125 +212,6 @@ if (count === 0) {
   insert.run("Cloud Engineering Day", 335, "2026-01-25", "Cloud");
   insert.run("Startup Pitch Night 2", 205, "2026-01-26", "Entrepreneurship");
   insert.run("Digital Marketing Bootcamp", 275, "2026-01-27", "Marketing");
-  insert.run("UI/UX Design Conference", 540, "2026-05-07", "Design");
-  insert.run("Product Management Summit", 370, "2026-05-08", "Product");
-  insert.run("Security Awareness Bootcamp", 410, "2026-05-09", "Security");
-  insert.run("Data Science for Startups", 490, "2026-05-10", "Data Science");
-  insert.run("Mobile App Creators Meetup", 550, "2026-05-11", "Mobile");
-  insert.run(
-    "Artificial Intelligence in Retail",
-    375,
-    "2026-05-12",
-    "Artificial Intelligence"
-  );
-  insert.run("Cloud Transformation Day", 440, "2026-05-13", "Cloud");
-  insert.run(
-    "Entrepreneurship Essentials",
-    280,
-    "2026-05-14",
-    "Entrepreneurship"
-  );
-  insert.run("Marketing Analytics Workshop", 355, "2026-05-15", "Marketing");
-  insert.run("Design Thinking Jam", 415, "2026-05-16", "Design");
-  insert.run("Product Roadmap Planning", 385, "2026-05-17", "Product");
-  insert.run("Security for Developers", 455, "2026-05-18", "Security");
-  insert.run("Data Science in Healthcare", 505, "2026-05-19", "Data Science");
-  insert.run("Mobile UX/UI Night", 555, "2026-05-20", "Mobile");
-  insert.run("AI for Business", 365, "2026-05-21", "Artificial Intelligence");
-  insert.run("Cloud Security Essentials", 435, "2026-05-22", "Cloud");
-  insert.run("Startup Pitch Bootcamp", 295, "2026-05-23", "Entrepreneurship");
-  insert.run("Content Marketing Mastery", 375, "2026-05-24", "Marketing");
-  insert.run("Design for Accessibility", 425, "2026-05-25", "Design");
-  insert.run("Product Innovation Day", 395, "2026-05-26", "Product");
-  insert.run("Security Operations Day", 465, "2026-05-27", "Security");
-  insert.run("Data Science for Marketing", 515, "2026-05-28", "Data Science");
-  insert.run("Mobile App Growth", 565, "2026-05-29", "Mobile");
-  insert.run("AI in Education", 375, "2026-05-30", "Artificial Intelligence");
-  insert.run("Cloud Automation Workshop", 445, "2026-05-31", "Cloud");
-  insert.run(
-    "Entrepreneurship Networking",
-    305,
-    "2026-06-01",
-    "Entrepreneurship"
-  );
-  insert.run("Digital Marketing Bootcamp", 385, "2026-06-02", "Marketing");
-  insert.run("Design Sprint Night", 435, "2026-06-03", "Design");
-  insert.run("Product Launch Workshop", 405, "2026-06-04", "Product");
-  insert.run("Security Panel Discussion", 475, "2026-06-05", "Security");
-  insert.run("Data Science Trends", 525, "2026-06-06", "Data Science");
-  insert.run("Mobile App Security", 575, "2026-06-07", "Mobile");
-  insert.run(
-    "AI for Social Good",
-    385,
-    "2026-06-08",
-    "Artificial Intelligence"
-  );
-  insert.run("Cloud Native Summit", 455, "2026-06-09", "Cloud");
-  insert.run("Startup Success Stories", 315, "2026-06-10", "Entrepreneurship");
-  insert.run("Brand Marketing Expo", 395, "2026-06-11", "Marketing");
-  insert.run("Design for Web", 445, "2026-06-12", "Design");
-  insert.run("Product Launchpad", 415, "2026-06-13", "Product");
-  insert.run("Security Best Practices", 485, "2026-06-14", "Security");
-  insert.run("Data Science Meetup", 535, "2026-06-15", "Data Science");
-  insert.run("Mobile App Design", 585, "2026-06-16", "Mobile");
-  insert.run("AI in Healthcare", 395, "2026-06-17", "Artificial Intelligence");
-  insert.run("Cloud Engineering Bootcamp", 465, "2026-06-18", "Cloud");
-  insert.run("Startup Pitch Night 5", 325, "2026-06-19", "Entrepreneurship");
-  insert.run("Performance Marketing Day", 405, "2026-06-20", "Marketing");
-  insert.run("Design Meetup", 455, "2026-06-21", "Design");
-  insert.run("Product Design Day", 425, "2026-06-22", "Product");
-  insert.run("Security Awareness Summit", 495, "2026-06-23", "Security");
-  insert.run("Data Science Bootcamp", 545, "2026-06-24", "Data Science");
-  insert.run("Mobile App Launch", 595, "2026-06-25", "Mobile");
-  insert.run("AI for Startups", 405, "2026-06-26", "Artificial Intelligence");
-  insert.run("Cloud Networking Day", 475, "2026-06-27", "Cloud");
-  insert.run("Startup Demo Day", 335, "2026-06-28", "Entrepreneurship");
-  insert.run("Content Strategy Expo", 415, "2026-06-29", "Marketing");
-  insert.run("Design for Mobile", 465, "2026-06-30", "Design");
-  insert.run("Product Innovation Forum", 435, "2026-07-01", "Product");
-  insert.run("Security Operations Meetup", 505, "2026-07-02", "Security");
-  insert.run("Data Science Night", 555, "2026-07-03", "Data Science");
-  insert.run("Mobile Testing Camp", 605, "2026-07-04", "Mobile");
-  insert.run("AI for Marketing", 415, "2026-07-05", "Artificial Intelligence");
-  insert.run("Cloud Security Night", 485, "2026-07-06", "Cloud");
-  insert.run("Startup Networking", 345, "2026-07-07", "Entrepreneurship");
-  insert.run("Performance Marketing", 425, "2026-07-08", "Marketing");
-  insert.run("Design Jam", 475, "2026-07-09", "Design");
-  insert.run("Product Growth Meetup", 445, "2026-07-10", "Product");
-  insert.run("Zero Trust Security", 515, "2026-07-11", "Security");
-  insert.run("Data Science Bootcamp 2", 565, "2026-07-12", "Data Science");
-  insert.run("Mobile App Launch 2", 615, "2026-07-13", "Mobile");
-  insert.run("AI in Logistics", 425, "2026-07-14", "Artificial Intelligence");
-  insert.run("Cloud Automation Summit", 495, "2026-07-15", "Cloud");
-  insert.run("Startup Legal Clinic", 355, "2026-07-16", "Entrepreneurship");
-  insert.run("Influencer Marketing", 435, "2026-07-17", "Marketing");
-  insert.run("Design Portfolio Review", 485, "2026-07-18", "Design");
-  insert.run("Product Feedback Forum", 455, "2026-07-19", "Product");
-  insert.run("Security Awareness Day", 525, "2026-07-20", "Security");
-  insert.run("Data Science for Business", 575, "2026-07-21", "Data Science");
-  insert.run("Mobile UX Meetup", 625, "2026-07-22", "Mobile");
-  insert.run("AI in Education", 435, "2026-07-23", "Artificial Intelligence");
-  insert.run("Cloud DevOps Day", 505, "2026-07-24", "Cloud");
-  insert.run("Startup Fundraising", 365, "2026-07-25", "Entrepreneurship");
-  insert.run("Social Media Marketing", 435, "2026-07-26", "Marketing");
-  insert.run("Design Sprint Workshop", 495, "2026-07-27", "Design");
-  insert.run("Product Strategy Day", 465, "2026-07-28", "Product");
-  insert.run("Application Security Expo", 535, "2026-07-29", "Security");
-  insert.run("Data Mining Meetup", 585, "2026-07-30", "Data Science");
-  insert.run("React Native Night", 635, "2026-07-31", "Mobile");
-  insert.run("AI for Good", 445, "2026-08-01", "Artificial Intelligence");
-  insert.run("Cloud Native Bootcamp", 515, "2026-08-02", "Cloud");
-  insert.run("Startup Success Stories", 375, "2026-08-03", "Entrepreneurship");
-  insert.run("Brand Marketing", 445, "2026-08-04", "Marketing");
-  insert.run("Design for Web", 495, "2026-08-05", "Design");
-  insert.run("Product Launchpad", 465, "2026-08-06", "Product");
-  insert.run("Security Panel", 535, "2026-08-07", "Security");
-  insert.run("Data Science Meetup", 585, "2026-08-08", "Data Science");
-  insert.run("Mobile App Design", 635, "2026-08-09", "Mobile");
-  insert.run("AI in Healthcare", 455, "2026-08-10", "Artificial Intelligence");
-  insert.run("Cloud Engineering Day", 525, "2026-08-11", "Cloud");
-  insert.run("Startup Pitch Night 6", 385, "2026-08-12", "Entrepreneurship");
-  insert.run("Digital Marketing Bootcamp", 455, "2026-08-13", "Marketing");
   insert.run("UI/UX Design Conference", 540, "2026-05-07", "Design");
   insert.run("Product Management Summit", 370, "2026-05-08", "Product");
   insert.run("Security Awareness Bootcamp", 410, "2026-05-09", "Security");

@@ -18,7 +18,7 @@ const EventsHomePage = () => {
   const [domains, setDomains] = useState<string[]>(["All"]);
 
   useEffect(() => {
-    let url = `/api/events?limit=30`;
+    let url = `/api/events?limit=200`;
     if (domain && domain !== "All") {
       url += `&domain=${encodeURIComponent(domain)}`;
     }
