@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="bg-gray-800 text-white px-6 py-4 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-gray-800 text-white px-6 py-4 flex items-center justify-between shadow">
       <div className="font-bold text-xl">
         <Link href="/">EventHub</Link>
       </div>

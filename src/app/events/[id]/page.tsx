@@ -31,12 +31,12 @@ export default async function EventDetailPage({
   // Example fallback details if not present in DB
   const description =
     event.description ||
-    "Join us for an exciting event filled with learning, networking, and fun! Don’t miss out on the latest trends and insights.";
+    "Join us for an exciting event filled with learning, networking, and fun! Don`t miss out on the latest trends and insights.";
   const location = event.location || "Main Conference Hall, City Center";
   const domain = event.domain || "General";
 
   return (
-    <main className="min-h-screen bg-gray-900 p-6 w-full mx-auto flex flex-col items-center">
+    <main className="min-h-screen bg-gray-900 p-6 w-full mx-auto flex flex-col items-center pt-20">
       <section className="bg-white rounded-xl shadow-lg p-8 w-full">
         <h1 className="text-3xl font-bold mb-4 text-blue-800">{event.title}</h1>
         <div className="mb-4 flex flex-wrap gap-4">

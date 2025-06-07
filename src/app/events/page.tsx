@@ -31,7 +31,7 @@ const EventsHomePage = () => {
   );
 
   return (
-    <main className="min-h-screen bg-gray-900 p-6 mx-auto w-full">
+    <main className="min-h-screen bg-gray-900 p-6 mx-auto w-full pt-20">
       <header className="mb-8">
         <h1 className="text-4xl font-bold text-white mb-2">Upcoming Events</h1>
         <p className="text-gray-400 text-xl">

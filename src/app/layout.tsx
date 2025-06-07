@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-gradient-to-br from-blue-50 to-blue-200 min-h-screen">
         <Navbar />
         {children}
       </body>
