@@ -31,15 +31,17 @@ const EventsHomePage = () => {
   );
 
   return (
-    <main className="min-h-screen bg-gray-900 p-6 mx-auto w-full pt-20">
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold text-white mb-2">Upcoming Events</h1>
-        <p className="text-gray-400 text-xl">
+    <main className="min-h-screen flex flex-col px-4 pt-20">
+      {/* <header className="mb-8 bg-white px-6 py-4 rounded-lg shadow-md text-white">
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">
+          Upcoming Events
+        </h1>
+        <p className="text-secondary text-md">
           Explore and register for the latest events.
         </p>
-      </header>
+      </header> */}
 
-      <section className="flex w-full justify-between items-center h-16">
+      <section className="flex w-full justify-between items-center">
         <div className="h-full">
           <label
             htmlFor="event-search"
@@ -53,7 +55,7 @@ const EventsHomePage = () => {
             placeholder="Search events..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="rounded-md border border-gray-400 bg-gray-800 text-gray-900 shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="rounded-md border border-gray-400 bg-white p-2 text-gray-900 shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -64,7 +66,7 @@ const EventsHomePage = () => {
           <select
             value={domain}
             onChange={(e) => setDomain(e.target.value)}
-            className="p-2 rounded-md border border-gray-400 bg-white text-gray-900 shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-2 rounded-md border border-gray-400 bg-white text-gray-900 w-full shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             {domains.map((d) => (
               <option key={d} value={d}>

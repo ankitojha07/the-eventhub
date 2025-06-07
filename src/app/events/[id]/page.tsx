@@ -36,9 +36,9 @@ export default async function EventDetailPage({
   const domain = event.domain || "General";
 
   return (
-    <main className="min-h-screen bg-gray-900 p-6 w-full mx-auto flex flex-col items-center pt-20">
-      <section className="bg-white rounded-xl shadow-lg p-8 w-full">
-        <h1 className="text-3xl font-bold mb-4 text-blue-800">{event.title}</h1>
+    <main className="min-h-screen flex flex-col items-center px-4 pt-20">
+      <section className="bg-card rounded-xl shadow-lg p-8 max-w-2xl w-full">
+        <h1 className="text-3xl font-bold mb-4 text-primary">{event.title}</h1>
         <div className="mb-4 flex flex-wrap gap-4">
           <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
             Domain: {domain}
@@ -58,10 +58,10 @@ export default async function EventDetailPage({
           </span>
         </div>
         <div className="mb-6">
-          <h2 className="text-lg font-semibold text-gray-800 mb-2">
+          <h2 className="text-lg font-semibold text-primary mb-2">
             Description
           </h2>
-          <p className="text-gray-700">{description}</p>
+          <p className="text-secondary">{description}</p>
         </div>
         <div className="mb-6">
           <h2 className="text-lg font-semibold text-gray-800 mb-2">Location</h2>

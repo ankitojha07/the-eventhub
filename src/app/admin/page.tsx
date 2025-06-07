@@ -46,8 +46,8 @@ const AdminPage = () => {
   ];
 
   return (
-    <main className="w-full mx-auto p-6 bg-gray-50 min-h-screen pt-20">
-      <h1 className="text-3xl font-extrabold mb-8 text-gray-900 border-b border-gray-300 pb-4">
+    <main className="min-h-screen flex flex-col px-4 pt-20">
+      <h1 className="text-3xl font-extrabold mb-8 text-primary border-b border-gray-300 pb-4">
         Admin Dashboard
       </h1>
 
