@@ -8,7 +8,7 @@ type Event = {
   title: string;
   date: string;
   count: number;
-  domain: string; // Add this line
+  domain: string;
 };
 
 const EventsHomePage = () => {
@@ -22,10 +22,8 @@ const EventsHomePage = () => {
       .then(setEvents);
   }, []);
 
-  // Get unique domains for filter options
   const domains = ["All", ...Array.from(new Set(events.map((e) => e.domain)))];
 
-  // Filter events by title and domain
   const filteredEvents = events.filter(
     (event) =>
       event.title.toLowerCase().includes(search.toLowerCase()) &&
@@ -33,12 +31,10 @@ const EventsHomePage = () => {
   );
 
   return (
-    <main className="min-h-screen bg-gray-900 p-6 max-full mx-auto">
+    <main className="min-h-screen bg-gray-900 p-6 mx-auto w-full">
       <header className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">
-          Upcoming Events
-        </h1>
-        <p className="text-gray-700 text-3xl">
+        <h1 className="text-4xl font-bold text-white mb-2">Upcoming Events</h1>
+        <p className="text-gray-400 text-xl">
           Explore and register for the latest events.
         </p>
       </header>

@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const HomePage = () => {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-200 flex flex-col items-center justify-center px-4">
-      <section className="bg-white rounded-xl shadow-lg p-10 max-w-xl w-full flex flex-col items-center">
+    <main className="h-screen bg-gradient-to-br from-blue-50 to-blue-200 flex flex-col items-center  px-4 justify-center">
+      <section className="bg-white rounded-xl shadow-lg p-10 w-full flex flex-col items-center">
         <h1 className="text-4xl font-extrabold mb-4 text-blue-800 text-center">
           Welcome to EventHub
         </h1>

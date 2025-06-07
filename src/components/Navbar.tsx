@@ -6,7 +6,7 @@ export default function Navbar() {
       <div className="font-bold text-xl">
         <Link href="/">EventHub</Link>
       </div>
-      <div className="space-x-4">
+      <div className="space-x-4 text-sm md:text-lg">
         <Link href="/" className="hover:underline">
           Home
         </Link>

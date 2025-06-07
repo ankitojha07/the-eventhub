@@ -5,12 +5,16 @@ type Event = {
   title: string;
   date: string;
   count: number;
+  domain?: string;
+  description?: string;
+  location?: string;
 };
 
 async function getEvent(id: string) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/events`
-  );
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL ||
+    (typeof window === "undefined" ? "http://localhost:3000" : "");
+  const res = await fetch(`${baseUrl}/api/events`);
   const events: Event[] = await res.json();
   return events.find((e: Event) => String(e.id) === id);
 }
@@ -24,25 +28,49 @@ export default async function EventDetailPage({
 
   if (!event) return notFound();
 
+  // Example fallback details if not present in DB
+  const description =
+    event.description ||
+    "Join us for an exciting event filled with learning, networking, and fun! Don’t miss out on the latest trends and insights.";
+  const location = event.location || "Main Conference Hall, City Center";
+  const domain = event.domain || "General";
+
   return (
-    <main className="min-h-screen bg-gray-900 p-6 max-w-xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4 text-gray-900">{event.title}</h1>
-      <p className="text-gray-700 mb-2">
-        <strong>Date:</strong>{" "}
-        <time dateTime={event.date}>
-          {new Date(event.date).toLocaleDateString(undefined, {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          })}
-        </time>
-      </p>
-      <p className="text-gray-700 mb-4">
-        <strong>Registrations:</strong> {event.count}
-      </p>
-      <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
-        Register
-      </button>
+    <main className="min-h-screen bg-gray-900 p-6 w-full mx-auto flex flex-col items-center">
+      <section className="bg-white rounded-xl shadow-lg p-8 w-full">
+        <h1 className="text-3xl font-bold mb-4 text-blue-800">{event.title}</h1>
+        <div className="mb-4 flex flex-wrap gap-4">
+          <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
+            Domain: {domain}
+          </span>
+          <span className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
+            Date:{" "}
+            <time dateTime={event.date}>
+              {new Date(event.date).toLocaleDateString(undefined, {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </time>
+          </span>
+          <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
+            Registrations: {event.count}
+          </span>
+        </div>
+        <div className="mb-6">
+          <h2 className="text-lg font-semibold text-gray-800 mb-2">
+            Description
+          </h2>
+          <p className="text-gray-700">{description}</p>
+        </div>
+        <div className="mb-6">
+          <h2 className="text-lg font-semibold text-gray-800 mb-2">Location</h2>
+          <p className="text-gray-700">{location}</p>
+        </div>
+        <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition font-semibold w-full">
+          Register
+        </button>
+      </section>
     </main>
   );
 }
