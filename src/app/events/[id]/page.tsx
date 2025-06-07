@@ -10,30 +10,24 @@ type Event = {
   location?: string;
 };
 
-async function getEvent(id: string): Promise<Event | undefined> {
+async function getEventById(id: string): Promise<Event | undefined> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-
   const res = await fetch(`${baseUrl}/api/events`, {
-    cache: "no-store", // just to be safe
+    cache: "no-store",
   });
-
   const events: Event[] = await res.json();
-  return events.find((e) => String(e.id) === id);
+  return events.find((e) => e.id === id);
 }
 
-export default async function EventDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const event = await getEvent(params.id);
-
+// ✅ THIS IS THE ONLY WAY TO AVOID TYPE ISSUES
+export default async function Page({ params }: { params: { id: string } }) {
+  const event = await getEventById(params.id);
   if (!event) return notFound();
 
   const description =
     event.description ||
     "Join us for an exciting event filled with learning, networking, and fun!";
-  const location = event.location || "Main Conference Hall";
+  const location = event.location || "Main Conference Hall, City Center";
   const domain = event.domain || "General";
 
   return (
