@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
-import { useEffect, useState } from "react";
 
 type Event = {
   id: string | number;
   title: string;
   date: string;
+  description?: string;
 };
 
 async function getEvent(id: string): Promise<Event | undefined> {
@@ -18,20 +18,12 @@ async function getEvent(id: string): Promise<Event | undefined> {
   return events.find((e) => String(e.id) === id);
 }
 
-export default function EventDetailPage({
+export default async function EventDetailPage({
   params,
 }: {
   params: { id: string };
 }) {
-  const [event, setEvent] = useState<Event | undefined>(undefined);
-
-  useEffect(() => {
-    getEvent(params.id).then(setEvent);
-  }, [params.id]);
-
-  if (event === undefined) {
-    return <main className="p-8">Loading...</main>;
-  }
+  const event = await getEvent(params.id);
 
   if (!event) {
     notFound();
@@ -43,7 +35,7 @@ export default function EventDetailPage({
       <h1 className="text-2xl font-bold mb-4">
         {event.title || "No title available."}
       </h1>
-      <p>{event.date || "No description available."}</p>
+      <p>{event.description || "No description available."}</p>
     </main>
   );
 }
