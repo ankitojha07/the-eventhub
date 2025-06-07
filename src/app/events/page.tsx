@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 type Event = {
-  id: string | number;
+  id: string;
   title: string;
   date: string;
   count: number;

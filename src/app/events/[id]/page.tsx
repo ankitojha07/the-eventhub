@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 type Event = {
-  id: string | number;
+  id: string;
   title: string;
   date: string;
   count: number;
@@ -10,7 +10,7 @@ type Event = {
   location?: string;
 };
 
-async function getEvent(id: string | number) {
+async function getEvent(id: string) {
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL ||
     (typeof window === "undefined" ? "http://localhost:3000" : "");
@@ -22,7 +22,7 @@ async function getEvent(id: string | number) {
 export default async function EventDetailPage({
   params,
 }: {
-  params: { id: string | number };
+  params: { id: string };
 }) {
   const event = await getEvent(params.id);
 
