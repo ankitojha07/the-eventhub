@@ -22,7 +22,7 @@ async function getEvent(id: string | number) {
 export default async function EventDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: { id: string | number };
 }) {
   const event = await getEvent(params.id);
 
