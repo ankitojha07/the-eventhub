@@ -1,33 +1,31 @@
 "use client";
-import React, { useState } from "react";
-
-const mockTopEvents = [
-  { id: 1, title: "React Summit 2025", count: 1200, domain: "Tech" },
-  { id: 2, title: "AI & ML Conference", count: 950, domain: "Tech" },
-  { id: 3, title: "Next.js Workshop", count: 740, domain: "Tech" },
-  { id: 4, title: "Docker Deep Dive", count: 620, domain: "Tech" },
-  { id: 5, title: "Cloud Native Day", count: 510, domain: "Tech" },
-  { id: 6, title: "Startup Pitch Night", count: 300, domain: "No Tech" },
-  { id: 7, title: "Marketing Meetup", count: 200, domain: "No Tech" },
-];
-
-const mockDailySignups = [
-  { date: "2025-06-01", count: 30 },
-  { date: "2025-06-02", count: 45 },
-  { date: "2025-06-03", count: 28 },
-  { date: "2025-06-04", count: 60 },
-  { date: "2025-06-05", count: 38 },
-];
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
 
 const domains = ["All", "Tech", "No Tech"];
 
+type Event = {
+  id: string | number;
+  title: string;
+  domain: string;
+  count: number;
+};
+
 const AdminPage = () => {
+  const [events, setEvents] = useState<Event[]>([]);
   const [selectedDomain, setSelectedDomain] = useState("All");
   const [sortBy, setSortBy] = useState<"title" | "count">("count");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
 
+  // Fetch events from SQLite via API
+  useEffect(() => {
+    fetch("/api/events")
+      .then((res) => res.json())
+      .then(setEvents);
+  }, []);
+
   // Filter and sort events
-  const filteredEvents = mockTopEvents
+  const filteredEvents = events
     .filter((ev) => selectedDomain === "All" || ev.domain === selectedDomain)
     .sort((a, b) => {
       if (sortBy === "count") {
@@ -37,6 +35,15 @@ const AdminPage = () => {
         ? b.title.localeCompare(a.title)
         : a.title.localeCompare(b.title);
     });
+
+  // You can keep mockDailySignups for now, or fetch real analytics later
+  const mockDailySignups = [
+    { date: "2025-06-01", count: 30 },
+    { date: "2025-06-02", count: 45 },
+    { date: "2025-06-03", count: 28 },
+    { date: "2025-06-04", count: 60 },
+    { date: "2025-06-05", count: 38 },
+  ];
 
   return (
     <main className="w-full mx-auto p-6 bg-gray-50 min-h-screen">
@@ -114,7 +121,9 @@ const AdminPage = () => {
                 key={ev.id}
                 className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}
               >
-                <td className="py-3 px-4 text-gray-700">{ev.title}</td>
+                <td className="py-3 px-4 text-blue-700 font-semibold underline hover:text-blue-900 transition">
+                  <Link href={`/events/${ev.id}`}>{ev.title}</Link>
+                </td>
                 <td className="py-3 px-4 text-gray-700">{ev.domain}</td>
                 <td className="py-3 px-4 text-gray-700 font-semibold">
                   {ev.count}
