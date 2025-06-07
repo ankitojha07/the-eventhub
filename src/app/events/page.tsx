@@ -15,14 +15,23 @@ const EventsHomePage = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [search, setSearch] = useState("");
   const [domain, setDomain] = useState<string>("All");
+  const [domains, setDomains] = useState<string[]>(["All"]);
 
   useEffect(() => {
-    fetch("/api/events")
+    let url = `/api/events?limit=30`;
+    if (domain && domain !== "All") {
+      url += `&domain=${encodeURIComponent(domain)}`;
+    }
+    fetch(url)
       .then((res) => res.json())
       .then(setEvents);
-  }, []);
+  }, [domain]);
 
-  const domains = ["All", ...Array.from(new Set(events.map((e) => e.domain)))];
+  useEffect(() => {
+    fetch("/api/domains")
+      .then((res) => res.json())
+      .then((data) => setDomains(["All", ...data]));
+  }, []);
 
   const filteredEvents = events.filter(
     (event) =>
