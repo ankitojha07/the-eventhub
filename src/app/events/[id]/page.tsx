@@ -1,5 +1,11 @@
 import { notFound } from "next/navigation";
 
+type PageProps = {
+  params: {
+    id: string;
+  };
+};
+
 type Event = {
   id: string | number;
   title: string;
@@ -19,19 +25,14 @@ async function getEvent(id: string) {
   return events.find((e: Event) => String(e.id) === id);
 }
 
-export default async function EventDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function EventDetailPage({ params }: PageProps) {
   const event = await getEvent(params.id);
 
   if (!event) return notFound();
 
-  // Example fallback details if not present in DB
   const description =
     event.description ||
-    "Join us for an exciting event filled with learning, networking, and fun! Don`t miss out on the latest trends and insights.";
+    "Join us for an exciting event filled with learning, networking, and fun! Don’t miss out on the latest trends and insights.";
   const location = event.location || "Main Conference Hall, City Center";
   const domain = event.domain || "General";
 
