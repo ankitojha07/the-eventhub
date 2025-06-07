@@ -1,61 +1,48 @@
-"use client";
+import { notFound } from "next/navigation";
 
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+type Event = {
+  id: string | number;
+  title: string;
+  date: string;
+  count: number;
+};
 
-export default function EventDetailPage() {
-  const { id } = useParams();
-  interface Event {
-    title: string;
-    date: string;
-    description: string;
-    // Add other fields as needed
-  }
+async function getEvent(id: string) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/events`
+  );
+  const events: Event[] = await res.json();
+  return events.find((e: Event) => String(e.id) === id);
+}
 
-  const [event, setEvent] = useState<Event | null>(null);
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+export default async function EventDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const event = await getEvent(params.id);
 
-  useEffect(() => {
-    fetch(`/api/events/${id}`)
-      .then((res) => res.json())
-      .then(setEvent);
-  }, [id]);
-
-  const handleRegister = async () => {
-    const res = await fetch(`/api/events/${id}`, {
-      method: "POST",
-      body: JSON.stringify({ user_email: email }),
-      headers: { "Content-Type": "application/json" },
-    });
-    const result = await res.json();
-    setMessage(result.message);
-  };
-
-  if (!event) return <p className="p-4">Loading...</p>;
+  if (!event) return notFound();
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">{event.title}</h1>
-      <p>{event.date}</p>
-      <p className="text-gray-600">{event.description}</p>
-
-      <div className="mt-4">
-        <input
-          type="email"
-          placeholder="Your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="border p-2 mr-2"
-        />
-        <button
-          onClick={handleRegister}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-        >
-          Register
-        </button>
-        {message && <p className="text-green-600 mt-2">{message}</p>}
-      </div>
-    </div>
+    <main className="min-h-screen bg-gray-900 p-6 max-w-xl mx-auto">
+      <h1 className="text-3xl font-bold mb-4 text-gray-900">{event.title}</h1>
+      <p className="text-gray-700 mb-2">
+        <strong>Date:</strong>{" "}
+        <time dateTime={event.date}>
+          {new Date(event.date).toLocaleDateString(undefined, {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </time>
+      </p>
+      <p className="text-gray-700 mb-4">
+        <strong>Registrations:</strong> {event.count}
+      </p>
+      <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
+        Register
+      </button>
+    </main>
   );
 }

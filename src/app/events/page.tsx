@@ -1,38 +1,86 @@
-import React from "react";
+"use client";
 
-const events = [
-  { id: 1, title: "React Summit 2025", count: 1200, date: "2025-09-12" },
-  { id: 2, title: "AI & ML Conference", count: 950, date: "2025-10-05" },
-  { id: 3, title: "Next.js Workshop", count: 740, date: "2025-08-28" },
-  { id: 4, title: "Docker Deep Dive", count: 620, date: "2025-11-15" },
-  { id: 5, title: "Cloud Native Day", count: 510, date: "2025-12-03" },
-];
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+
+type Event = {
+  id: string | number;
+  title: string;
+  date: string;
+  count: number;
+  domain: string; // Add this line
+};
 
 const EventsHomePage = () => {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [search, setSearch] = useState("");
+  const [domain, setDomain] = useState<string>("All");
+
+  useEffect(() => {
+    fetch("/api/events")
+      .then((res) => res.json())
+      .then(setEvents);
+  }, []);
+
+  // Get unique domains for filter options
+  const domains = ["All", ...Array.from(new Set(events.map((e) => e.domain)))];
+
+  // Filter events by title and domain
+  const filteredEvents = events.filter(
+    (event) =>
+      event.title.toLowerCase().includes(search.toLowerCase()) &&
+      (domain === "All" || event.domain === domain)
+  );
+
   return (
-    <main className="min-h-screen bg-gray-50 p-6 max-w-7xl mx-auto">
-      {/* Header */}
+    <main className="min-h-screen bg-gray-900 p-6 max-full mx-auto">
       <header className="mb-8">
         <h1 className="text-4xl font-bold text-gray-900 mb-2">
           Upcoming Events
         </h1>
-        <p className="text-gray-700">
+        <p className="text-gray-700 text-3xl">
           Explore and register for the latest events.
         </p>
       </header>
 
-      {/* Search bar (UI only) */}
-      <div className="mb-8 max-w-md">
-        <input
-          type="search"
-          placeholder="Search events..."
-          className="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        />
-      </div>
+      <section className="flex w-full justify-between items-center h-16">
+        <div className="h-full">
+          <label
+            htmlFor="event-search"
+            className="block text-gray-200 font-semibold mb-2"
+          >
+            Search Events
+          </label>
+          <input
+            id="event-search"
+            type="search"
+            placeholder="Search events..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="rounded-md border border-gray-400 bg-gray-800 text-gray-900 shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
-      {/* Events grid */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {events.map((event) => (
+        <div className="h-full">
+          <label className="block text-gray-200 font-semibold">
+            Filter by Domain
+          </label>
+          <select
+            value={domain}
+            onChange={(e) => setDomain(e.target.value)}
+            className="p-2 rounded-md border border-gray-400 bg-white text-gray-900 shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            {domains.map((d) => (
+              <option key={d} value={d}>
+                {d}
+              </option>
+            ))}
+          </select>
+        </div>
+      </section>
+
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+        {filteredEvents.map((event) => (
           <div
             key={event.id}
             className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col justify-between"
@@ -56,12 +104,12 @@ const EventsHomePage = () => {
               </p>
             </div>
 
-            <button
-              type="button"
-              className="mt-auto bg-blue-600 text-white font-semibold rounded-md py-2 hover:bg-blue-700 transition"
+            <Link
+              href={`/events/${event.id}`}
+              className="mt-auto bg-blue-600 text-white font-semibold rounded-md py-2 hover:bg-blue-700 transition text-center"
             >
-              Register
-            </button>
+              View Details
+            </Link>
           </div>
         ))}
       </section>
